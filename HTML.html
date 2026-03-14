@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Web Calculator</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background-color: #121212; color: white; }
+        .calc-card { background: #1e1e1e; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); width: 300px; }
+        input, select, button { width: 100%; margin: 10px 0; padding: 10px; border-radius: 5px; border: none; }
+        button { background-color: #007bff; color: white; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0056b3; }
+        #result-display { margin-top: 20px; padding: 10px; background: #333; border-radius: 5px; text-align: center; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+<div class="calc-card">
+    <h2>Py-Calculator</h2>
+    
+    <input type="number" id="num1" placeholder="First Number">
+    
+    <select id="operation">
+        <option value="ADD">+</option>
+        <option value="SUB">-</option>
+        <option value="MUL">×</option>
+        <option value="DIV">÷</option>
+        <option value="MOD">% (Remainder)</option>
+        <option value="POW">** (Power)</option>
+        <option value="FLOOR">// (Floor)</option>
+    </select>
+    
+    <input type="number" id="num2" placeholder="Second Number">
+    
+    <button py-click="run_calculation">Calculate</button>
+
+    <div id="result-display">Result: <span id="output">?</span></div>
+</div>
+
+<script type="py">
+from pyscript import document
+
+def pro(N, A, B):
+    if N == "ADD":
+        return A + B
+    elif N == "SUB":
+        return A - B
+    elif N == "MUL":
+        return A * B
+    elif N == "DIV":
+        if B == 0: return "Error: /0"
+        return A / B
+    elif N == "MOD":
+        return A % B
+    elif N == "POW":
+        return A ** B
+    elif N == "FLOOR":
+        if B == 0: return "Error: /0"
+        return A // B
+    else:
+        return "Invalid!"
+
+def run_calculation(event):
+    # Get values from the HTML inputs
+    n1 = float(document.querySelector("#num1").value)
+    n2 = float(document.querySelector("#num2").value)
+    op = document.querySelector("#operation").value
+    
+    # Run your pro function
+    final_result = pro(op, n1, n2)
+    
+    # Put the result back into the HTML
+    document.querySelector("#output").innerText = str(final_result)
+</script>
+
+</body>
+</html>
