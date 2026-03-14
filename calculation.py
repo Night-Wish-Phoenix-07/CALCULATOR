@@ -4,7 +4,7 @@ def pro(N):
     a=A+B
     return a
   elif N == "SUB":
-    a=A+B
+    a=A-B
     return a
   elif N == "MUL":
     a=A*B
